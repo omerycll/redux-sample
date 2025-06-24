@@ -59,6 +59,7 @@ export const CustomersList: React.FC = () => {
     },
   ];
 
+  console.log('customers', customers);
   // Fetch customers on component mount only once
   useEffect(() => {
     dispatch(fetchCustomers(filterState));
@@ -67,13 +68,12 @@ export const CustomersList: React.FC = () => {
   // Sort customers alphabetically
   const orderedCustomers = useMemo(() => {
     if (!customers || customers.length === 0) return [];
+    // customer object check
+    if (typeof customers !== 'object') {
+      return [];
+    }
 
-    return customers
-      .slice()
-      .sort(
-        (a: Customer, b: Customer) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+    return customers;
   }, [customers]);
 
   // Handle refresh action

@@ -68,6 +68,9 @@ export const ProductsList: React.FC = () => {
   // Sort products alphabetically
   const orderedProducts = useMemo(() => {
     if (!products || products.length === 0) return [];
+    if (typeof products !== 'object') {
+      return [];
+    }
 
     return products
       .slice()
